@@ -7,6 +7,8 @@ import { Routes } from "./routes";
 import { Category } from "./entity/Category";
 import * as path from "path";
 
+let allAngularRoutes = ['/register', '/home', '/statistic', '/statistic/graphic', '/statistic/table', '/add', '/list'];
+
 createConnection().then(async connection => {
 
     const port = process.env.PORT || 3000;
@@ -15,7 +17,9 @@ createConnection().then(async connection => {
     const app = express();
     app.use(bodyParser.json());
     app.use(express.static(path.join(__dirname, './../dist')));
-    app.use('*', express.static(path.join(__dirname, './../dist')));
+    allAngularRoutes.forEach(route => {
+        app.use(route, express.static(path.join(__dirname, './../dist')));
+    });
 
     // register express routes from defined application routes
     Routes.forEach(route => {
