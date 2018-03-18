@@ -9,8 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot -prod",
-    "deploy": "tsc -p tsconfig-server.json & node dist-server/index.js",
+    "postinstall": "ng build --aot -prod & tsc -p tsconfig-server.json",
+    "deploy": "node dist-server/index.js",
     "build-server": "node dist-server/index.js"
   },
   "private": true,
