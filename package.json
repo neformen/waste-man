@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng build --prod & tsc -p tsconfig-server/.json & node dist-server/inde.js"
+    "deploy": " npm run build & tsc -p tsconfig-server/.json & node dist-server/index.js"
   },
   "private": true,
   "dependencies": {
