@@ -11,7 +11,8 @@
     "e2e": "ng e2e",
     "postinstall": "ng build --aot -prod & tsc -p tsconfig-server.json",
     "deploy": "node dist-server/index.js",
-    "build-server": "node dist-server/index.js"
+    "build-server": "node dist-server/index.js",
+    "dev-server": "ts-node server/index.ts"
   },
   "private": true,
   "dependencies": {

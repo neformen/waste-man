@@ -1,3 +1,24 @@
 <p>
   list-of-items-component works!
 </p>
+
+<p-table [value]="allCategories">
+  <ng-template pTemplate="header">
+      <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Action</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-category>
+      <tr>
+          <td>{{category.id}}</td>
+          <td>{{category.categoryName}}</td>
+          <td><p-button label="delete" (onClick)="deleteCategory(category.id)"></p-button></td>
+      </tr>
+  </ng-template>
+</p-table>
+
+<button (click)="getCategories()">Click me</button>
+<button (click)="getCategory()">Click me 2</button>
+<button (click)="addCategory()">Click me 3</button>

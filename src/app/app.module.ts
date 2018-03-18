@@ -1,7 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http'
 
 import { ButtonModule } from 'primeng/button';
+import { DataViewModule } from 'primeng/dataview';
+import { TableModule } from 'primeng/table';
 
 
 import { AppComponent } from './app.component';
@@ -15,6 +20,8 @@ import { ListOfItemsComponentComponent } from './list-of-items-component/list-of
 import { HistogramComponentComponent } from './histogram-component/histogram-component.component';
 import { GraphicComponentComponent } from './graphic-component/graphic-component.component';
 import { TableComponentComponent } from './table-component/table-component.component';
+import { InterceptorsService } from './services/interceptors.service';
+import { CategotyService } from './services/categoty.service';
 
 
 @NgModule({
@@ -33,9 +40,17 @@ import { TableComponentComponent } from './table-component/table-component.compo
   imports: [
     BrowserModule,
     ButtonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule,
+    HttpClientModule,
+    DataViewModule,
+    TableModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorsService,
+    multi: true
+  }, CategotyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
