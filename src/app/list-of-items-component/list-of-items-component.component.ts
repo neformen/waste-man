@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CategotyService } from "./../services/categoty.service";
-import { Category } from "./../shared/entities/Category";
+import { CategotyService } from './../services/categoty.service';
+import { Category } from './../shared/entities/Category';
 
 @Component({
   selector: 'app-list-of-items-component',
@@ -9,43 +9,31 @@ import { Category } from "./../shared/entities/Category";
 })
 export class ListOfItemsComponentComponent implements OnInit {
 
-  allCategories: Category[];
+  categories: Category[];
+  newCategoryName: string;
 
   constructor(private categoryService: CategotyService) { }
 
   ngOnInit() {
-    this.categoryService.getCategories().subscribe((resp: Category[]) => {
-      this.allCategories = resp;
-    });
+    this.getCategories();
   }
 
   public getCategories() {
-    this.categoryService.getCategories().subscribe((resp: Category[]) => {
-      this.allCategories = resp;
-    });
-  }
-
-  public getCategory() {
-    console.log(new Category("TestCategoty"));
-    this.categoryService.getCategory(1).subscribe((resp: Category) => {
-      console.log(2, resp);
+    this.categoryService.getCategories().subscribe((categories: Category[]) => {
+      this.categories = categories.sort((a, b) => b.id - a.id);
     });
   }
 
   public addCategory() {
-    console.log(this.categoryService.addCategory(new Category("TestCategoty")));
-    this.categoryService.addCategory(new Category("TestCategoty")).subscribe((e) => {
+    const newCategory = new Category(this.newCategoryName);
+    this.categoryService.addCategory(newCategory).subscribe(() => {
       this.getCategories();
-      console.log(e);
-    }), (e) => {
-      console.log(e);
-    };
+    });
   }
 
   public deleteCategory(id: number) {
-    this.categoryService.deleteCategory(id).subscribe((res: any) => {
-      console.log(res);
-      this.getCategories();
+    this.categoryService.deleteCategory(id).subscribe((categories: Category[]) => {
+      this.categories = categories.sort((a, b) => b.id - a.id);
     });
   }
 

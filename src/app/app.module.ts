@@ -1,13 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http'
+import { FormsModule } from '@angular/forms';
 
 import { ButtonModule } from 'primeng/button';
 import { DataViewModule } from 'primeng/dataview';
 import { TableModule } from 'primeng/table';
-
+import { InputTextModule } from 'primeng/inputtext';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,7 +22,6 @@ import { GraphicComponentComponent } from './graphic-component/graphic-component
 import { TableComponentComponent } from './table-component/table-component.component';
 import { InterceptorsService } from './services/interceptors.service';
 import { CategotyService } from './services/categoty.service';
-
 
 @NgModule({
   declarations: [
@@ -44,13 +43,17 @@ import { CategotyService } from './services/categoty.service';
     HttpModule,
     HttpClientModule,
     DataViewModule,
-    TableModule
+    TableModule,
+    FormsModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: InterceptorsService,
-    multi: true
-  }, CategotyService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorsService,
+      multi: true
+    },
+    CategotyService
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Category } from "./../shared/entities/Category";
+import { Category } from './../shared/entities/Category';
 
 @Injectable()
 export class CategotyService {
@@ -15,11 +15,11 @@ export class CategotyService {
     return this.http.get<Category>(`${this.apiUrl}/${id}`);
   }
   addCategory(category: Category): Observable<Category> {
-    let headers = new HttpHeaders();
+    const headers = new HttpHeaders();
     headers.append('Content-Type', 'application/json');
     return this.http.post<Category>(this.apiUrl, category, { headers });
   }
-  deleteCategory(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  deleteCategory(id: number): Observable<Category[]> {
+    return this.http.delete<Category[]>(`${this.apiUrl}/${id}`);
   }
 }

@@ -1,6 +1,6 @@
-import { getRepository } from "typeorm";
-import { NextFunction, Request, Response } from "express";
-import { Category } from "../entity/Category";
+import { getRepository } from 'typeorm';
+import { NextFunction, Request, Response } from 'express';
+import { Category } from '../entity/Category';
 
 export class CategoryController {
 
@@ -20,6 +20,6 @@ export class CategoryController {
 
     async remove(request: Request, response: Response, next: NextFunction) {
         await this.categoryRepository.removeById(request.params.id);
+        return this.categoryRepository.find();
     }
-
 }
