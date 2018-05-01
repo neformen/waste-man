@@ -14,8 +14,7 @@ createConnection().then(async connection => {
     // create express app
     const app = express();
     app.use(bodyParser.json());
-    app.use(express.static(path.join(__dirname, './../dist')));
-    //app.use(/^\/(?!api).*/, express.static(path.join(__dirname, './../dist')));
+    app.use(/^\/(?!api).*/, express.static(path.join(__dirname, './../dist')));
 
     // register express routes from defined application routes
     Routes.forEach(route => {
@@ -28,11 +27,6 @@ createConnection().then(async connection => {
                 res.json(result);
             }
         });
-    });
-  
-    app.use(function(err, req, res, next) {
-      console.error(err);
-      next();
     });
 
     // setup express app here
